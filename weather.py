@@ -1,10 +1,12 @@
 import os.path
 import tornado.ioloop
 import tornado.web
+import time, datetime
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        weatherMeasurements = [55,50,80,1000,500,220]
+        localtime = datetime.datetime.fromtimestamp(time.time()).strftime('%I:%M %p %A %B %d %Y')
+        weatherMeasurements = [55,50,80,1000,500,220, localtime]
         self.render("index.html", weatherMeasurements=weatherMeasurements)
 
 handlers = [
