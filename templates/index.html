@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+<div class="inner">
+	<h2>Friday March 14, 2014</h2>
+
+	<div class="left-block">
+			<ul>
+			 {% for weatherMeasurement in weatherMeasurements %}
+				 <li>{{ weatherMeasurement }}</li>
+			 {% end %}
+			</ul>
+	</div>
+	<div class="right-block">
+		<img src="images/PartlyCloudy_small.png" />
+		<br />
+		<p><a href="http://plot.ly/~crakins" target="_blank">Daily Weather Plots</a></p>
+		<!-- <a href="http://plot.ly/~crakins" target="_blank"><img src="images/plot.jpg" /></a> -->
+		
+	</div>
+
+	<div class="clr">&nbsp;</div>
+</div>
+<div class="bottom">
+	<div class="inner">
+	<p>Want to join the project?  Leave your email!</p>
+	<ul class="signup">
+		<li><input type="text" class="inputbox" placeholder="you@yourmail.com" /></li>
+		<li><input type="button" class="submit" value="Submit" /></li>
+	</ul>
+	<!--
+	<ul class="social">
+		<li><a href="http://www.facebook.com/dzyngiri" title="Facebook"><img src="images/fb.png" alt="Facebook" /></a></li>
+		<li><a href="http://twitter.com/dzyngiri" title="Twitter"><img src="images/tw.png" alt="Twitter" /></a></li>
+		<li><a href="http://feeds.feedburner.com/Dzyngiri" title="RSS Feed"><img src="images/rss.png" alt="RSS Feed" /></a></li>
+	</ul> -->
+	</div>
+</div>
+{% end %}
+
