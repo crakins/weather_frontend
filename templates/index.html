@@ -3,13 +3,14 @@
 {% block content %}
   
 <div class="inner">
-	<h2>Friday March 14, 2014</h2>
-
 	<div class="left-block">
 			<ul>
-			 {% for weatherMeasurement in weatherMeasurements %}
-				 <li>{{ weatherMeasurement }}</li>
-			 {% end %}
+				<li>Temperature: {{ weatherMeasurements[0] }}&#176; F</li>
+				<li>Baro Temp: {{ weatherMeasurements[1] }}&#176; F</li>
+				<li>Humidty: {{ weatherMeasurements[2] }}%</li>
+				<li>Pressure: {{ weatherMeasurements[3] }} hPa</li>
+				<li>Altitude: {{ weatherMeasurements[4] }} ft</li>
+				<li>@ {{ weatherMeasurements[5] }}</li>
 			</ul>
 	</div>
 	<div class="right-block">
