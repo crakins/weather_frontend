@@ -10,7 +10,7 @@
 				<li>Humidty: {{ weatherMeasurements[2] }}%</li>
 				<li>Pressure: {{ weatherMeasurements[3] }} hPa</li>
 				<li>Altitude: {{ weatherMeasurements[4] }} ft</li>
-				<li>@ {{ weatherMeasurements[5] }}</li>
+				<li><span>@ {{ weatherMeasurements[5] }}</span></li>
 			</ul>
 	</div>
 	<div class="right-block">
@@ -26,16 +26,17 @@
 <div class="bottom">
 	<div class="inner">
 	<p>Want to join the project?  Leave your email!</p>
+	<form name="input" method="POST">
 	<ul class="signup">
-		<li><input type="text" class="inputbox" placeholder="you@yourmail.com" /></li>
-		<li><input type="button" class="submit" value="Submit" /></li>
+		<li><input type="text" name="email" class="inputbox" placeholder="you@yourmail.com" /></li>
+		<li><input type="submit" class="submit" value="Submit" /></li>
 	</ul>
-	<!--
+	</form>
 	<ul class="social">
-		<li><a href="http://www.facebook.com/dzyngiri" title="Facebook"><img src="images/fb.png" alt="Facebook" /></a></li>
-		<li><a href="http://twitter.com/dzyngiri" title="Twitter"><img src="images/tw.png" alt="Twitter" /></a></li>
-		<li><a href="http://feeds.feedburner.com/Dzyngiri" title="RSS Feed"><img src="images/rss.png" alt="RSS Feed" /></a></li>
-	</ul> -->
+		<li><img src="images/banner_github.png" alt="GitHub" />&nbsp;<a href="https://github.com/crakins/weather_frontend" title="GitHub">https://github.com/crakins/weather_frontend</a></li>
+		<!--<li><a href="http://www.tarrantmakers.org" title="TarrantMakers"><img src="images/tw.png" alt="Tarrant Makers" /></a></li>
+		<li><a href="http://crakins.com" title="crakins"><img src="images/rss.png" alt="crakins" /></a></li> -->
+	</ul> 
 	</div>
 </div>
 {% end %}

@@ -1,13 +1,13 @@
-import os.path
 import tornado.ioloop
 import tornado.web
+import os.path
+import sqlite3 as db
 import serial
 import time, datetime, pytz
 
 class MainHandler(tornado.web.RequestHandler):
-
-    def get(self):
-        # Serial Setup
+	def get(self):
+		# Serial Setup
 		try:
 			serialConnection = serial.Serial('/dev/ttyAMA0', 9600, timeout = 1)
 		except:
@@ -37,17 +37,34 @@ class MainHandler(tornado.web.RequestHandler):
 		# convert to English measurements (Can't get a new function to work right now)
 		englishList = []
 		# c to f
-		englishList.append(float(weatherData[0]) * 1.8 + 32)
-		englishList.append(float(weatherData[1]) * 1.8 + 32)
-		englishList.append(weatherData[2])
+		englishList.append(int(float(weatherData[0]) * 1.8 + 32))
+		englishList.append(int(float(weatherData[1]) * 1.8 + 32))
+		englishList.append(int(float(weatherData[2])))
 		# Baro pressure
-		englishList.append(weatherData[3])
+		englishList.append(int(float(weatherData[3])))
 		# altitude, meters to feet
-		englishList.append(float(weatherData[4]) * 3.2808)
+		englishList.append(int(float(weatherData[4]) * 3.2808))
 		# add timestamp
 		englishList.append(timestamp)
 		self.render("index.html", weatherMeasurements=englishList)
-		
+
+	def post(self):
+		# Get email address from form
+		email = self.get_argument("email")
+		# Get timestamp
+		email_timestamp = datetime.datetime.now(pytz.timezone('US/Central')).strftime('%Y-%m-%d %H:%M:%S')
+		# connect to database
+		connection = db.connect('emails.db')
+		cur = connection.cursor()
+		cur.execute("CREATE TABLE IF NOT EXISTS emails (email TEXT, timestamp TEXT)")
+		# store in database
+		with connection:
+			cur.execute("INSERT INTO emails VALUES (?, ?)", (email, email_timestamp))
+		# close database connection
+		connection.close()
+		self.redirect("/", status=303)
+
+
 
 handlers = [
 	(r"/images/(.*)",tornado.web.StaticFileHandler, {"path": "/home/pi/server/weather/weather_frontend/images"}),
