@@ -12,8 +12,8 @@ class MainHandler(tornado.web.RequestHandler):
 			serialConnection = serial.Serial('/dev/ttyAMA0', 9600, timeout = 1)
 		except:
 			print "ERROR: cannot connect to serial port"
-		else:
-			print "Connection to Serial Port ok"
+		#else:
+			#print "Connection to Serial Port ok"
 		
 		# open serial connection and readline
 		serialConnection = serial.Serial('/dev/ttyAMA0', 9600, timeout = 1)
@@ -24,29 +24,36 @@ class MainHandler(tornado.web.RequestHandler):
 		while weatherMeasurements == "":
 			weatherMeasurements = serialConnection.readline()
 		
-		# close serial connection
-		serialConnection.close()
-		#print "Serial connection closed"
+		#print len(weatherMeasurements)
 		
-		# calcualte time and append to weather data and remove '/r/n' 
-		timestamp = datetime.datetime.now(pytz.timezone('US/Central')).strftime('%I:%M %p %A %B %d %Y')
-		weatherMeasurements.strip()
-		weatherData = []
-		weatherData = weatherMeasurements.split(',')
+		if len(weatherMeasurements) > 20:
 		
-		# convert to English measurements (Can't get a new function to work right now)
-		englishList = []
-		# c to f
-		englishList.append(int(float(weatherData[0]) * 1.8 + 32))
-		englishList.append(int(float(weatherData[1]) * 1.8 + 32))
-		englishList.append(int(float(weatherData[2])))
-		# Baro pressure
-		englishList.append(int(float(weatherData[3])))
-		# altitude, meters to feet
-		englishList.append(int(float(weatherData[4]) * 3.2808))
-		# add timestamp
-		englishList.append(timestamp)
-		self.render("index.html", weatherMeasurements=englishList)
+			# close serial connection
+			serialConnection.close()
+			#print "Serial connection closed"
+			
+			# calcualte time and append to weather data and remove '/r/n' 
+			timestamp = datetime.datetime.now(pytz.timezone('US/Central')).strftime('%I:%M %p %A %B %d %Y')
+			weatherMeasurements.strip()
+			weatherData = []
+			weatherData = weatherMeasurements.split(',')
+			
+			# convert to English measurements (Can't get a new function to work right now)
+			englishList = []
+			# c to f
+			englishList.append(int(float(weatherData[0]) * 1.8 + 32))
+			englishList.append(int(float(weatherData[1]) * 1.8 + 32))
+			englishList.append(int(float(weatherData[2])))
+			# Baro pressure
+			englishList.append(int(float(weatherData[3])))
+			# altitude, meters to feet
+			englishList.append(int(float(weatherData[4]) * 3.2808))
+			# add timestamp
+			englishList.append(timestamp)
+			self.render("index.html", weatherMeasurements=englishList)
+		
+		else:
+			self.render("index.html", weatherMeasurements=weatherMeasurements)
 
 	def post(self):
 		# Get email address from form
