@@ -10,18 +10,18 @@
 				<li>Humidty: {{ weatherMeasurements[2] }}%</li>
 				<li>Pressure: {{ weatherMeasurements[3] }} hPa</li>
 				<li>Altitude: {{ weatherMeasurements[4] }} ft</li>
-				<li><span>@ {{ weatherMeasurements[5] }}</span></li>
+				<li>Device: {{ weatherMeasurements[6] }}</li>
+				<li><span>@ {{ weatherMeasurements[7] }}</span></li>
 			</ul>
 	</div>
 	<div class="right-block">
-		<img src="images/PartlyCloudy_small.png" />
+		<img src={{ weatherMeasurements[5] }} />
 		<br />
 		<p><a href="http://plot.ly/~crakins" target="_blank">Weather Plots</a></p>
 		<!-- <a href="http://plot.ly/~crakins" target="_blank"><img src="images/plot.jpg" /></a> -->
-		
 	</div>
 
-	<div class="clr">&nbsp;</div>
+	<div class="clr"></div>
 </div>
 <div class="bottom">
 	<div class="inner">
@@ -33,9 +33,8 @@
 	</ul>
 	</form>
 	<ul class="social">
-		<li><img src="images/banner_github.png" alt="GitHub" />&nbsp;<a href="https://github.com/crakins/weather_frontend" title="GitHub">https://github.com/crakins/weather_frontend</a></li>
-		<!--<li><a href="http://www.tarrantmakers.org" title="TarrantMakers"><img src="images/tw.png" alt="Tarrant Makers" /></a></li>
-		<li><a href="http://crakins.com" title="crakins"><img src="images/rss.png" alt="crakins" /></a></li> -->
+		<li><img src="images/banner_github.png" alt="GitHub" />&nbsp;<a href="github.com/crakins/weather_frontend" title="GitHub">https://github.com/crakins/weather_frontend</a></li>
+		<li><img src="images/tm.png" alt="Tarrant Makers" />&nbsp;<a href="www.tarrantmakers.org" title="TarrantMakers">http://www.tarrantmakers.org</a></li>
 	</ul> 
 	</div>
 </div>

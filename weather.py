@@ -19,7 +19,7 @@ class MainHandler(tornado.web.RequestHandler):
 		serialConnection = serial.Serial('/dev/ttyAMA0', 9600, timeout = 1)
 		#print "Serial connection established"
 		
-		# weather format (temp, barotemp, humidity, pressure, altitude)
+		# weather format (0:temp, 1:barotemp, 2:humidity, 3:pressure, 4:altitude, 5: photocell, 6:uniqueID)
 		weatherMeasurements = ""
 		while weatherMeasurements == "":
 			weatherMeasurements = serialConnection.readline()
@@ -48,6 +48,15 @@ class MainHandler(tornado.web.RequestHandler):
 			englishList.append(int(float(weatherData[3])))
 			# altitude, meters to feet
 			englishList.append(int(float(weatherData[4]) * 3.2808))
+			# add photocell measurement
+			if int(float(weatherData[5])) <= 350:
+				englishList.append("images/night.png")
+			elif int(float(weatherData[5])) > 350 and int(float(weatherData[5])) <= 800:
+				englishList.append("images/cloudy.png")
+			elif int(float(weatherData[5])) > 800:
+				englishList.append("images/sunny.png")
+			# add uniqueID
+			englishList.append(str(weatherData[6]))
 			# add timestamp
 			englishList.append(timestamp)
 			self.render("index.html", weatherMeasurements=englishList)
@@ -74,8 +83,8 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 handlers = [
-	(r"/images/(.*)",tornado.web.StaticFileHandler, {"path": "/home/pi/server/weather/weather_frontend/images"}),
 	(r"/css/(.*)",tornado.web.StaticFileHandler, {"path": "/home/pi/server/weather/weather_frontend/css"}),
+	(r"/images/(.*)",tornado.web.StaticFileHandler, {"path": "/home/pi/server/weather/weather_frontend/images"}),
 	(r"/", MainHandler),
 ]
 

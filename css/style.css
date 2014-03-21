@@ -59,7 +59,7 @@ img {
 }
 
 .inner {
-	max-width:1024px;
+	max-width:900px;
 	margin:0 auto;
 }
 
@@ -112,7 +112,6 @@ img {
 	letter-spacing: 0px;
 	color: #000000;
 	text-align:left;
-	margin:0 0 30px 0;
 }
 
 .left-block li {
@@ -168,7 +167,7 @@ ul.signup li {
     -moz-box-shadow: 0 0 9px #666666 inset;
 	-webkit-box-shadow: 0 0 9px #666666 inset;
 	box-shadow: 0 0 9px #666666 inset;
-    color: blue;
+    color: yellow;
     cursor: pointer;
     font-family: Courier;
     font-size: 12px;
@@ -189,6 +188,7 @@ ul.social {
 	margin: 15px auto 15px -46px;}
 ul.social li {
 	list-style-type: none;
+	line-height: 30px;
 }
 	/*.social li a {
 		margin:5px;
@@ -208,6 +208,25 @@ ul.social li {
 	margin-top:10px;
 	text-align:center;
 }
+
+.image-swap{
+	display: inline-block;
+	height: 42px;
+	width: 120px;
+	background-image: url(../images/crakinscom_120.png);
+	background-repeat: no-repeat;
+	/*margin:100px 500px 0 0;*/
+	color: none;
+	text-decoration: none;
+}
+
+.image-swap:hover{
+	background-image: url(../images/crakinscom_yellow_120.png);
+	background-repeat: no-repeat;
+	background-color: #C2E066;
+}
+
+
 		
 /*---- Media Queries to make design responsive ----*/
 
